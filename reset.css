@@ -1,0 +1,122 @@
+@charset "utf-8";
+/* CSS Document */
+/* reset */
+html,body,h1,h2,h3,h4,h5,h6,div,dl,dt,dd,ul,ol,li,p,blockquote,pre,hr,figure,table,caption,th,td,form,fieldset,legend,input,button,textarea,menu{margin:0;padding:0;}
+header,footer,section,article,aside,nav,hgroup,address,figure,figcaption,menu,details{display:block;}
+table{border-collapse:collapse;border-spacing:0;}
+caption,th{text-align:left;font-weight:normal;}
+html,body,fieldset,img,iframe,abbr{border:0;}
+i,cite,em,var,address,dfn{font-style:normal;font-weight:normal;}
+[hidefocus],summary{outline:0;}
+ol,ul,li{list-style:none;}
+h1,h2,h3,h4,h5,h6,small{font-size:100%;font-weight:normal;}
+sup,sub{font-size:83%;}
+pre,code,kbd,samp{font-family:inherit;}
+q:before,q:after{content:none;content:'';}
+textarea{overflow:auto;resize:none;}
+label,summary{cursor:default;}
+a,button{cursor:pointer;}
+h1,h2,h3,h4,h5,h6,strong,b{font-weight:bold;}
+del,ins,u,s,a,a:hover{text-decoration:none;}
+body,textarea,input,button,select,keygen,legend{font:12px/1.14 arial,\5b8b\4f53;color:#333;outline:0;}
+body{background:#fff;}
+a,a:hover{color:#333;}
+.clearfix:after{content:'\20';display:block;height:0;clear:both}
+.clearfix{zoom:1}
+body{
+	background: url(img/bgall.jpg) no-repeat fixed;
+	background-size: 100% 100%;
+}
+
+* { margin: 0; padding: 0;}
+.myscroll { width: 300px; height: 35px; margin: 0 auto; line-height: 26px; font-size: 15px; overflow: hidden;}
+.myscroll li { height: 26px;}
+.myscroll a { color: #333; text-decoration: none;}
+.myscroll a:hover { color: #ED5565; text-decoration: underline;}
+
+.mask {       
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    filter: alpha(opacity=60);
+    background-color: #696969;
+    z-index: 1002;
+    opacity:0.5;
+    -moz-opacity:0.5;
+}
+.showMask-css {
+
+}
+
+@media screen and (max-width: 1920px) {
+	.g-content {
+		width: 100%;
+		height: auto;
+		font-family: "微软雅黑", "microsoft yahei";
+		margin-top: 20px;
+		margin-bottom: 20px;
+	}
+	.g-content .g-lottery-case {
+		width: 500px;
+		height: 445px;
+		margin: 0 auto;
+		overflow: hidden;
+	}
+	
+	.g-lottery-box {
+		width: 400px;
+		height: 400px;
+		margin: 0 auto;
+		position: relative;
+		background: url(img/ly-plate-c.gif) no-repeat;
+	}
+	
+	.g-lottery-box .g-lottery-img {
+		width: 340px;
+		height: 340px;
+		position: relative;
+		background: url(img/bg-lottery.png) no-repeat;
+		left: 30px;
+		top: 30px;
+	}
+	
+	.g-lottery-box .playbtn {
+		width: 186px;
+		height: 186px;
+		position: absolute;
+		top: 77px;
+		left: 77px;
+		background: url(img/playbtn.png) no-repeat;
+	}
+
+}
+
+@media screen and (max-width: 500px) {
+	.g-content .g-lottery-case {
+		width: 300px;
+		height: 300px;
+	}
+	
+	.g-lottery-box {
+		width: 300px;
+		height: 300px;
+		background-size: 300px 300px;
+	}
+	
+	.g-lottery-box .g-lottery-img {
+		width: 260px;
+		height: 260px;
+		left: 20px;
+		top: 20px;
+		background-size: 260px 260px;
+	}
+	
+	.g-lottery-box .playbtn {
+		width: 100px;
+		height: 100px;
+		top: 80px;
+		left: 80px;
+		background-size: 100px 100px;
+	}
+
+}
