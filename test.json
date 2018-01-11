@@ -1,29 +1,11 @@
 { 
 	"programmers": [
 
-		{ "firstName": "Brett", "lastName":"McLaughlin", "email": "aaaaaaaaaaaaaaaaaaaa" },
+		{ "firstName": "Brett", "email": "今日优惠:饮料类全场九五折!!!" },
 
-		{ "firstName": "Jason", "lastName":"Hunter", "email": "bbbbbbbbbbbbbbbbbbbb" },
+		{ "firstName": "Jason", "email": "XX便利店位于xx市xx区xx街道xxxx" },
 
-		{ "firstName": "Elliotte", "lastName":"Harold", "email": "cccccccccccccccccccc" }
+		{ "firstName": "Elliotte", "email": "外送电话:0595-12365478/13245678987" }
 
-	],
-
-	"authors": [
-
-		{ "firstName": "Isaac", "lastName": "Asimov", "genre": "science fiction" },
-
-		{ "firstName": "Tad", "lastName": "Williams", "genre": "fantasy" },
-
-		{ "firstName": "Frank", "lastName": "Peretti", "genre": "christian fiction" }
-
-	],
-
-	"musicians": [
-
-		{ "firstName": "Eric", "lastName": "Clapton", "instrument": "guitar" },
-
-		{ "firstName": "Sergei", "lastName": "Rachmaninoff", "instrument": "piano" }
-
-	] 
+	]
 } 

@@ -1,0 +1,13 @@
+html,body,div,span{
+    padding:0;
+    text-align: center;
+    margin:0 auto;
+}
+html,body{
+    height:100%;
+    width:100%;
+}
+body{
+	background: url(img/ltimg.jpg) no-repeat fixed;
+	background-size: 100% 100%;
+}

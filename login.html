@@ -1,0 +1,274 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge，chrome=1">
+	<meta content="telephone=no" name="format-detection">
+	<meta name="keywords" content="html,css,js">
+	<meta name="description" content="">
+	<title>抽奖页</title>
+	<link href="" type="image/x-icon" rel="shortcut icon"/> 
+	<!-- <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"> -->
+	<link type="text/css" href="login.css" rel="stylesheet"/>
+</head>
+
+<body>
+	<!-- <div id="mask" class="mask">
+		<div>
+			<input type="text">
+		</div>
+	</div> -->
+
+	<div style="margin-top: 20px;">
+		<div class="myscroll">
+			<ul>
+			</ul>
+		</div>
+	</div>
+
+	<div class="g-content">
+		<div class="g-lottery-case">
+			<div class="g-lottery-box">
+				<div class="g-lottery-img" onclick="Qualifications()">
+					<a class="playbtn" href="javascript:;" title="开始抽奖"></a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div>
+	
+	</div>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/jquery-1.11.0.min.js"><\/script>')</script>
+<script type="text/javascript" src="js/jquery.rotate.min.js"></script>
+<script type="text/javascript" src="js/scroll.js"></script>
+<script type="text/javascript" src="js/layer.js"></script>
+<script>
+	$(function() {
+		var searchUrl = window.location.href;
+		var searchData = searchUrl.split("=");
+		var searchText = decodeURI(searchData[1]);
+
+		var url = "http://192.168.18.174:8080/shop/"+searchText;
+		$.ajax({
+			type: 'GET',
+			url: url,
+			dataType: 'JSON',
+			data: {},
+			success: function(e) {
+				var shop_name = e.data.shopName;
+				var shop_addr = e.data.shopAddress;
+				var shop_phone = e.data.telephone;
+				var li = '<li>'+shop_name+','+shop_phone+','+shop_addr+'</li><br/><li>'+shop_name+','+shop_phone+','+shop_addr+'</li><br/>';
+				$('ul').append(li);
+			},
+			error: function(){
+				var $li = $('<li>暂无商家信息!暂无商家信息!暂无商家信息!</li><li>暂无商家信息!暂无商家信息!暂无商家信息!</li><li>暂无商家信息!暂无商家信息!暂无商家信息!</li>');
+				$('ul').append($li);
+			}
+		})
+
+		$('.myscroll').myScroll({
+			speed: 40, //数值越大，速度越慢
+			rowHeight: 30 //li的高度
+		});
+	});
+
+		function Qualifications() {
+			$.ajax({
+				type: 'GET',
+				url: 'http://192.168.18.174:8080/customer/isQualifications/4028922e60da2ef20160da2f4b540000?prizeName=test',
+				dataType: 'JSON',
+				success: function(data) {
+					console.log(data);
+					if (data.ret) {
+						clickfunc();
+					} else {
+						if (data.data.prizeName == "test") {
+							layer.open({
+								content:'你已经抽奖过了,请输入手机号领取奖品!!',
+								btn: '我知道了',
+								time: 3,
+								yes: function(){
+									showMask(1);
+								}
+							});
+						} else {
+							alert(11);
+						}
+					}
+					// var qualifications = data.ret;
+					// if (!qualifications) {
+					// 	playnum = 0;
+					// } else {
+					// 	playnum = 1;
+					// }
+				},
+				error: function (XMLHttpRequest, textStatus, errorThrown){
+					console.log("无法进行抽奖资格资格");
+                   	// console.log(XMLHttpRequest);
+                    // console.log(textStatus);
+                    // console.log(errorThrown);
+                }
+			})
+		}
+
+
+		// var playnum = 1; //初始次数，由后台传入
+		// var isture = 0;
+		// $btn.click(function() {
+		// 	if(isture) return; // 如果在执行就退出
+		// 	isture = true; // 标志为 在执行
+		// 		if(playnum <= 0) { //当抽奖次数为0的时候执行
+		// 			alert("没有次数了");
+		// 			isture = false;
+		// 		} else { //还有次数就执行
+		// 			playnum = playnum - 1; //执行转盘了则次数减1
+		// 			if(playnum <= 0) {
+		// 				playnum = 0;
+		// 			}
+		// 			clickfunc();
+		// 		}
+		// });
+
+		function clickfunc() {
+			var data = Math.floor((Math.random()*100)+1);
+			// console.log(data);
+			if (data <= 10) {
+				rotateFunc(1, 0, '领流量');
+			} else if (data > 10 & data <= 20) {
+				rotateFunc(2, 60, '送话费');
+			} else if (data > 20 & data <= 50) {
+				rotateFunc(3, 120, '购机券');
+			} else if (data > 50 & data <= 60) {
+				rotateFunc(4, 180, '免费选号');
+			} else if (data > 60 & data <= 65) {
+				rotateFunc(5, 240, '满减金额');
+			} else if (data > 65 & data <= 100) {
+				rotateFunc(6, 300, '谢谢惠顾');
+			} else {
+				rotateFunc(6, 300, '谢谢惠顾');
+			}
+		}
+		
+		var $btn = $('.playbtn');
+		function rotateFunc(awards, angle, text) {
+			isture = true;
+			$btn.stopRotate();
+			$btn.rotate({
+				angle: 0,
+				duration: 4000, //旋转时间
+				animateTo: angle + 1440, //让它根据得出来的结果加上1440度旋转
+				callback: function() {
+					isture = false; // 标志为 执行完毕
+					if (awards < 6) {
+						showMask(awards);
+					} else {
+						var text = $.trim(awards);
+						var searchUrl = encodeURI("http://192.168.18.161:80/turntable/index.html?awards=" + text);
+						window.location.href = searchUrl;
+					}
+				}
+			});
+		};
+
+		function showMask(awards) {
+			var prizeId = awards;
+
+			layer.open({
+				type: 1,
+				skin: 'footer',
+				className: 'showMask-css',
+				title: ['输入手机号领取奖励', 'letter-spacing:2px;font-weight:bold;color:#F94C00;'],
+				content: '<input id="phoneNumber" class="phoneNumber" type="number" placeholder="请输入手机号" autocomplete="off" oninput="if(value.length>11)value=value.slice(0,11)"><input id="verificationCode" class="verificationCode" type="number" placeholder="请输入验证码" autocomplete="off" oninput="if(value.length>6)value=value.slice(0,6)"><input id="btnSendCode" class="btnSendCode" type="button" value="获取验证码" onclick="sendMessage()"/>',
+				btn: ['确定', '取消'],
+				anim: 'up',
+				shadeClose: false,
+				yes: function() {
+					var phone2 = $("#phoneNumber").val();
+					var phoneLength2 = phone2.length;
+					var verificationCode = $("#verificationCode").val();
+					var codeLength = verificationCode.length;
+					if (phone2 == "" || phone2 == undefined || phone2 == null || phoneLength2 != 11) {
+						alert("请填写完整11位的手机号码!");
+					} else if (verificationCode == "" || verificationCode == undefined || verificationCode == null || codeLength != 6) {
+						alert("请填写完整的6位手机验证码!");
+					} else {
+						$.ajax({
+							contentType: "application/json; charset=utf-8",
+							type: "POST",
+							dataType: "JSON",
+							// url: 'http://192.168.18.174:8080/customer/'+searchText,
+							
+							data: JSON.stringify({
+								"customerPhone": phone2,
+  								"prizeName": "购机"
+							}),
+							success: function(data) {
+								console.log(data);
+							},
+							error: function(XMLHttpRequest, textStatus, errorThrown) {
+								alert("抱歉,提交失败,请重新操作!");
+                        		// console.log(XMLHttpRequest);
+                        		// console.log(textStatus);
+                        		// console.log(errorThrown);
+            				}
+						});
+					}
+				},
+				no: function() {
+					console.log("取消");
+				}
+			});
+		}
+
+	var InterValObj; 
+    var count = 60;  
+    var curCount;
+	function sendMessage() {
+		curCount = count;
+		var phone = $("#phoneNumber").val();
+		var phoneLength = phone.length;
+		if(phone != "" & phoneLength == 11){
+			// $.ajax({
+			// 	type: "POST",
+			// 	dataType: "JSON",
+			// 	url: URL,
+			// 	data: phone,
+			// 	success: function(data) {
+
+			// 	},
+			// 	error: function (XMLHttpRequest, textStatus, errorThrown){
+   //                 	alert("抱歉,操作失败!");
+   //                 	// console.log(XMLHttpRequest);
+   //                  // console.log(textStatus);
+   //                  // console.log(errorThrown);
+   //              }
+			// });
+
+            $("#btnSendCode").attr("disabled", "true");
+            InterValObj = window.setInterval(SetRemainTime, 1000); 
+		} else if (phoneLength == 0){
+			alert("手机号码不能为空！");
+		} else {
+			alert("请填写完整11位的手机号码.");
+		}
+	}
+
+	function SetRemainTime(){
+        if (curCount == 0) {
+            window.clearInterval(InterValObj);
+            $("#btnSendCode").removeAttr("disabled");
+            $("#btnSendCode").val("重新发送验证码");
+        } else {
+            curCount--;
+            $("#btnSendCode").val("倒数" + curCount + "秒");
+        }
+    }
+</script>
+</body>
+</html>
