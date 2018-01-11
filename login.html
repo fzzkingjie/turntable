@@ -98,7 +98,11 @@
 								}
 							});
 						} else {
-							alert(11);
+							layer.open({
+    							content: ''
+    							,skin: 'msg'
+    							,time: 2 //2秒后自动关闭
+  							});
 						}
 					}
 					// var qualifications = data.ret;
@@ -194,9 +198,17 @@
 					var verificationCode = $("#verificationCode").val();
 					var codeLength = verificationCode.length;
 					if (phone2 == "" || phone2 == undefined || phone2 == null || phoneLength2 != 11) {
-						alert("请填写完整11位的手机号码!");
+						layer.open({
+    						content: '请填写完整11位的手机号码!'
+    						,skin: 'msg'
+    						,time: 3 //2秒后自动关闭
+  						});
 					} else if (verificationCode == "" || verificationCode == undefined || verificationCode == null || codeLength != 6) {
-						alert("请填写完整的6位手机验证码!");
+						layer.open({
+    						content: '请填写完整的6位手机验证码!'
+    						,skin: 'msg'
+    						,time: 3 //2秒后自动关闭
+  						});
 					} else {
 						$.ajax({
 							contentType: "application/json; charset=utf-8",
@@ -212,7 +224,11 @@
 								console.log(data);
 							},
 							error: function(XMLHttpRequest, textStatus, errorThrown) {
-								alert("抱歉,提交失败,请重新操作!");
+								layer.open({
+    								content: '抱歉,提交失败,请重新操作!'
+    								,skin: 'msg'
+    								,time: 3 //2秒后自动关闭
+  								});
                         		// console.log(XMLHttpRequest);
                         		// console.log(textStatus);
                         		// console.log(errorThrown);
@@ -253,9 +269,17 @@
             $("#btnSendCode").attr("disabled", "true");
             InterValObj = window.setInterval(SetRemainTime, 1000); 
 		} else if (phoneLength == 0){
-			alert("手机号码不能为空！");
+			layer.open({
+    			content: '手机号码不能为空!'
+    			,skin: 'msg'
+    			,time: 3 //2秒后自动关闭
+  			});
 		} else {
-			alert("请填写完整11位的手机号码.");
+			layer.open({
+    			content: '请填写完整11位的手机号码.'
+    			,skin: 'msg'
+    			,time: 3 //2秒后自动关闭
+  			});
 		}
 	}
 
