@@ -76,7 +76,13 @@
 			speed: 40, //数值越大，速度越慢
 			rowHeight: 30 //li的高度
 		});
+
+		setTimeout("Qualifications()",2000);
 	});
+
+		// $(window).load(function(){
+  //   		setTimeout(Qualifications(),2000);//1000毫秒=1秒后执行test方法
+		// });
 
 		function Qualifications() {
 			$.ajax({
@@ -91,8 +97,8 @@
 						if (data.data.prizeName == "test") {
 							layer.open({
 								content:'你已经抽奖过了,请输入手机号领取奖品!!',
-								btn: '我知道了',
-								time: 3,
+								btn: '好的,我这就去.',
+								time: 5,
 								yes: function(){
 									showMask(1);
 								}
@@ -182,13 +188,13 @@
 
 		function showMask(awards) {
 			var prizeId = awards;
-
+			var userphone = localStorage.getItem("userphone");
 			layer.open({
 				type: 1,
 				skin: 'footer',
 				className: 'showMask-css',
 				title: ['输入手机号领取奖励', 'letter-spacing:2px;font-weight:bold;color:#F94C00;'],
-				content: '<input id="phoneNumber" class="phoneNumber" type="number" placeholder="请输入手机号" autocomplete="off" oninput="if(value.length>11)value=value.slice(0,11)"><input id="verificationCode" class="verificationCode" type="number" placeholder="请输入验证码" autocomplete="off" oninput="if(value.length>6)value=value.slice(0,6)"><input id="btnSendCode" class="btnSendCode" type="button" value="获取验证码" onclick="sendMessage()"/>',
+				content: '<input id="phoneNumber" class="phoneNumber" type="number" value="'+userphone+'" placeholder="请输入手机号" autocomplete="off" oninput="if(value.length>11)value=value.slice(0,11)"><input id="verificationCode" class="verificationCode" type="number" placeholder="请输入验证码" autocomplete="off" oninput="if(value.length>6)value=value.slice(0,6)"><input id="btnSendCode" class="btnSendCode" type="button" value="获取验证码" onclick="sendMessage()"/>',
 				btn: ['确定', '取消'],
 				anim: 'up',
 				shadeClose: false,
@@ -210,6 +216,7 @@
     						,time: 3 //2秒后自动关闭
   						});
 					} else {
+						localStorage.setItem("userphone",phone2);
 						$.ajax({
 							contentType: "application/json; charset=utf-8",
 							type: "POST",
